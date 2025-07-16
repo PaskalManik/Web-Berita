@@ -3,9 +3,9 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Post;
-use App\Models\Category; // <-- 1. Import Category
+use App\Models\Category; 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str; // <-- 2. Import Str
+use Illuminate\Support\Str; 
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             return Category::create(['name' => $name, 'slug' => Str::slug($name)]);
         });
 
-        Post::factory(20)->create()->each(function ($post) use ($categories) {
+        Post::factory(10)->create()->each(function ($post) use ($categories) {
             $post->categories()->attach(
                 $categories->random(rand(1, 3))->pluck('id')->toArray()
             );
